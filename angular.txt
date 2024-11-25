@@ -1,0 +1,61 @@
+. Install Node.js and Set Up Your Project
+1. Install Node.js:
+o Go to the Node.js download page and install the LTS version for your platform.
+o Verify installation by running:
+bash
+Copy code
+node -v
+npm -v
+2. Set Up Your Node.js Project:
+o Open a terminal and navigate to your project directory.
+o Run the following command to initialize a new Node.js project (if not done already):
+bash
+Copy code
+npm init -y
+3. Install Required Dependencies:
+o You need express, mongoose, and other packages to interact with MongoDB. Install them by running:
+bash
+Copy code
+npm install express mongoose body-parser
+4. Create Your server.js File:
+o If you don't have a server.js file, create one in the root of your project and include basic server setup and MongoDB connection:
+javascript
+Copy code
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+// Use body-parser to parse incoming JSON
+app.use(bodyParser.json());
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/userdetails', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.log('Error connecting to MongoDB:', err));
+
+// Simple route for testing
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+
+// Start the server
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+3. Run Your Application
+1. Start the MongoDB server (if not running):
+o In your terminal, type:
+bash
+Copy code
+mongod
+2. Start your Node.js application:
+o In your project folder, type:
+bash
+Copy code
+node server.js
+3. This will start your server and it should be accessible at http://localhost:3000.
+4. 
+
